@@ -1,7 +1,11 @@
+add_library('sound')
+from processing.sound import SoundFile
+
 x = 50
 y = 50
 spd = 1
 sketch = None
+background_music = None
 scrW = 1920
 scrH = 1080
 ellW = 50
@@ -15,6 +19,9 @@ def setup():
     
     sketch = loadImage("sketch.png")
     frameRate(60)
+    
+    background_music = SoundFile(this, "bg.mp3")
+    background_music.loop()
     
 def draw():
     global x, y, test_sprite, spd, sketch, ellW, ellH, scrW, scrH
@@ -37,9 +44,9 @@ def draw():
         elif keyCode == LEFT:
             x -= spd
         elif keyCode == UP:
-            y += spd
-        elif keyCode == DOWN:
             y -= spd
+        elif keyCode == DOWN:
+            y += spd
     
 
      
