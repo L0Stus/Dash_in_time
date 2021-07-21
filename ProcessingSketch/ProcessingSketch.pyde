@@ -85,13 +85,8 @@ def keyReleased():
 
 def setup():
     global sketch, scrW, scrH, h_nh, sprite, box_, h_nh_left, walking_r, walking_l, main, mainsprite, jumping_r, jumping_l
-    # scrW = width
-    # scrH = height
-    # fullScreen()
     size(1920, scrH)
     frameRate(300)
-    #setTitle("Nikita")
-    #noCursor()
     
     sketch = loadImage("bg.png")
     h_nh = loadImage("h_nh.png")
@@ -109,11 +104,7 @@ def setup():
 
 
 def draw():
-    #print("X: {}, y: {}".format(x, y))
     global x, y, test_sprite, spd, sketch, ellW, ellH, scrW, scrH, slowing, spdx, spdy, prevX, prevY, h_nh, h_nv, h_hh, h_nh_left, box_, isJumping, spdxbox, spdybox, xbox, ybox, distX, distY, isInteractWithPlayer, sprite, walking_r, walking_l, ind, press, right, mainsprite, bsx, bsy, sx, wr, wl
-    #background(250, 100, 100)
-    # image(test_sprite, mouseX, mouseY, 60, 40)
-    #println(walking)
     
     
     spdx *= slowing
@@ -130,8 +121,8 @@ def draw():
             ybox = 447
             
         
-    if 1:#not (276 < x < 330):
-        if (y + ellH / 2) < 412:  
+    if 1: #тут должны быть корды зоны, в которой чекл падает, например not (276 < x < 330):
+        if (y + ellH / 2) < 412:   
             spdy += 0.2
         if (y + ellH / 2) >= 412:
             spdy = 0
@@ -142,29 +133,9 @@ def draw():
         spdy += 0.2
     
     if keyPressed:
-        
-                # elif keyCode == UP:
-        #     spdy -= 0.5
-        # elif keyCode == DOWN:
-        #     spdy += 0.5
         if  (keyCode == UP or (key == ' ' and keyCode == 0)) and (not isJumping):
             spdy += -6.2
             isJumping = True
-        # elif key == 'v' or key == 'V':
-        #     pass
-        # elif key == 'e' or key == 'E':
-        #     isInteractWithPlayer = not isInteractWithPlayer
-        #     distX = xbox - x
-        #     distY = ybox - y
-        #     println(distX)
-        #     println(distY)
-        #     println(isInteractWithPlayer)
-            
-        # elif keyCode == 0 and len(key) == 0:
-        #     print("1233A")
-        # else:
-        #     println("Keycode: " + str(keyCode) + ' ' + str(type(keyCode)))
-        #     276, 330
     else:
         press = False
     
@@ -200,57 +171,14 @@ def draw():
             sprite = jumping_r
         else:
             sprite = jumping_l
-    #370, 44
-    # if  x >= scrW - ellW/2:
-    #     x = scrW - ellW/2
-    # if y >= scrH - ellH/2:
-    #     y = scrH - ellH/ 2
-    # if y <= ellH/2:
-    #     y =  ellH/2
-    # if x <= ellW/2:
-    #     x =  ellW/2
-    
-        
-    # col1 = get_collider_positions(261, 50, 331, 311)
-    # for xx, yy in col1:
-    #     if x == xx:
-    #         x -= (x - col1[0][0]) 
-    #     if y == yy: 
-    #         x -= (x - col1[0][0]) 69 407
-                    
-    #
-    # if ((ybox - 128/2) <= y <= (ybox + 100/2)) and (((xbox - 100 / 2) < x) or (x < (xbox + 100 / 2))) and (not isInteractWithPlayer):
-    #     x = prev
-    #     y = prevY
-    
-    # for X in range(int(round(x - ellW / 2)), int(round((x + ellW / 2) + 1))):
-    #     for Y in range(int(round(y - ellH / 2)), int(round((y + ellH / 2) + 1))):
-    #         if (ybox - bsy / 2) <= Y <= (ybox + bsy / 2):
-    #             if (xbox - bsx / 2) <= X <= (xbox + bsx / 2):
-    #                 println("Coll!!!")
-    #println(str(mouseX)+' '+str(mouseY))
     col_points_p = [[x - ellW / 2, y - ellH / 2], [x + ellW / 2, y - ellH / 2], [x - ellW / 2, y + ellH / 2], [x + ellW / 2, y + ellH / 2]]
     col_points_b = [[xbox - bsx / 2, ybox - bsy], [xbox + bsx / 2, ybox - bsy], [xbox - bsx / 2, ybox + bsy], [xbox + bsx / 2, ybox + bsy]]
-    
-    # println(str(col_points_p[3][1] > col_points_b[0][1]))
-    # println(str(col_points_p[3][1]))
-    # println(str(col_points_b[0][1]))
     if (col_points_p[1][0] > col_points_b[0][0]) and (col_points_p[0][0] < col_points_b[1][0]):
-        # if col_points_p[2][1] < col_points_b[0][1]:
-        #     println("F")
-        #     if col_points_b[0][1] <= col_points_p[2][1]: 
-        #         spdy = 0
-        #         y = col_points_b[0][1]
         if (col_points_p[3][1] > col_points_b[0][1]):
-            # if isJumping:
-            #     spdy = 0
             if right:
                 x -= abs(col_points_b[0][0] - col_points_p[1][0])
             elif not rights:
                 x += abs(col_points_b[1][0] - col_points_p[0][0])
-    
-    # if (col_points_b[2][1] - col_points_p[2][1] < 0):
-    #     x -= abs(col_points_b[2][1] - col_points_p[2][1])
 
     x += spdx
     y += spdy
@@ -265,5 +193,3 @@ def draw():
     image(box_, xbox, ybox, bsx, bsy)
     image(sprite, x, y, ellW, ellH)
     prevX = round(x)
-    prevY = round(y)
-    #println("X = " + str(x) + ", Y = " +  str(y))
